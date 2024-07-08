@@ -1,0 +1,52 @@
+{
+  "name": "logtimecheater-react",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "homepage": "./",
+  "dependencies": {
+    "nosleep.js": "^0.12.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "4.0.3"
+  },
+  "scripts": {
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && npm run electron\"",
+    "react-start": "cross-env NODE_OPTIONS='--openssl-legacy-provider' react-scripts start",
+    "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider' react-scripts build",
+    "test": "cross-env NODE_OPTIONS='--openssl-legacy-provider' react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.logtime.react",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "wait-on": "^7.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

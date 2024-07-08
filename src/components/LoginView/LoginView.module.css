@@ -1,0 +1,66 @@
+.login_view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	transform: translateY(-78px);
+}
+
+.user_info_holder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+}
+
+.avatar {
+	width: 96px;
+	height: 96px;
+}
+
+.username {
+	color: #fff;
+	font-size: 1.15em;
+	font-weight: 500;
+	text-shadow: 0 0 10px black;
+	margin: 0;
+}
+
+.login_input_holder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	transform: translateX(17.5px);
+	padding-top: 14px;
+}
+
+.login_input_holder input {
+	font-size: 13px;
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	height: 27px;
+	width: 159px;
+	padding: 6px;
+	box-sizing: border-box;
+	background-color: rgba(61, 60, 61, 0.76);
+	backdrop-filter: blur(0.5rem);
+	color: #ffffff69;
+	font-weight: 900;
+	margin-top: 10px;
+}
+
+.login_input_holder input::placeholder {
+	color: #6d6b6c;
+	font-weight: 550;
+}
+
+.login_input_holder img {
+	width: 15px;
+	height: 15px;
+	background-color: #656465;
+	border-radius: 50%;
+	padding: 5px;
+	transform: translate(-1.5px, 5px);
+}

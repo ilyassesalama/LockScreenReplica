@@ -1,0 +1,82 @@
+.root_view {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #000;
+}
+
+.wallpaper {
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 0.8;
+}
+
+.clock {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #fff;
+	font-size: 0.89em;
+	font-weight: 350;
+	text-shadow: 0 0 0 rgba(0, 0, 0, 0.299), 0 0 1em rgba(0, 0, 0, 0.255),
+		0 0 1.2em rgba(0, 0, 0, 0.7);
+}
+
+.wifikeyicon {
+	height: 17px;
+    position: absolute;
+    top: 6px;
+    right: 76px;
+	text-shadow: 0 0 0 rgba(0, 0, 0, 0.299), 0 0 1em rgba(0, 0, 0, 0.255),
+		0 0 1.2em rgba(0, 0, 0, 0.7);
+}
+
+.login_view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	position: absolute;
+}
+
+.location {
+	position: absolute;
+	bottom: 202px;
+	font-size: 12.5px;
+	color: white;
+	font-weight: 65	0;
+	text-shadow: 0 0 0 rgba(0, 0, 0, 0.299), 0 0 1em rgba(0, 0, 0, 0.255),
+		0 0 1.2em rgba(0, 0, 0, 0.7);
+}
+
+.cancel_holder {
+	bottom: 83px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	background: rgb(82, 82, 82, 0.5);
+	border-radius: 150%;
+	padding: 5px;
+}
+
+.cancel_holder img {
+	width: 32px;
+	height: 32px;
+}
+
+.cancel_holder p {
+	font-size: 0.8rem;
+	font-weight: 550;
+	margin: 0;
+	padding-top: 4px;
+}

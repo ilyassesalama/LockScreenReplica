@@ -1,0 +1,11 @@
+.clock {
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: 550;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 6px;
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0.299), 0 0 1em rgba(0, 0, 0, 0.255),
+    0 0 1.2em rgba(0, 0, 0, 0.7);
+}
