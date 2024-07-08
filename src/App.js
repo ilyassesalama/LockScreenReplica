@@ -1,12 +1,20 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import NoSleep from 'nosleep.js';
 import LockScreen from './pages/LockScreen/LockScreen';
 
 const App = () => {
-    const [isLocked, setIsLocked] = useState(false);
-    const nosleep = typeof NoSleep !== 'undefined' ? new NoSleep() : null;
     const [lockTimer, setLockTimer] = useState(null);
+    const [isLocked, setIsLocked] = useState(false);
+    const isLockedRef = useRef(isLocked);
+    const nosleep = typeof NoSleep !== 'undefined' ? new NoSleep() : null;
+
+    const unlockScreen = () => {
+        document.getElementById('password_input').focus();
+        if (isLockedRef.current) {
+            setIsLocked(false);
+        }
+    };
 
     useEffect(() => {
         if (nosleep) {
@@ -15,11 +23,6 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        const unlockScreen = () => {
-            document.getElementById('password_input').focus();
-            setIsLocked(false);
-        };
-
         document.addEventListener('keypress', unlockScreen);
         document.addEventListener('click', unlockScreen);
 
@@ -30,15 +33,15 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        isLockedRef.current = isLocked;
+
         if (isLocked) {
             document.body.classList.add('fadein');
             document.body.style.cursor = 'none';
-            console.log('Locked');
         } else {
             document.body.classList.remove('fadein');
             document.body.style.cursor = 'default';
             document.getElementById('password_input').focus();
-            console.log('Unlocked');
         }
     }, [isLocked]);
 
@@ -47,7 +50,7 @@ const App = () => {
             setLockTimer(
                 setTimeout(() => {
                     setIsLocked(true);
-                }, 30000)
+                }, 65000)
             );
         } else {
             clearTimeout(lockTimer);
@@ -60,7 +63,7 @@ const App = () => {
 
     return (
         <div className='App'>
-            <LockScreen />
+            <LockScreen isLocked={isLocked} setIsLocked={setIsLocked} />
         </div>
     );
 };

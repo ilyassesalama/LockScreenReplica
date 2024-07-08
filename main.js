@@ -72,7 +72,6 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
-    if (app.dock) app.dock.hide();
     createWindow();
 });
 

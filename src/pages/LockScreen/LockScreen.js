@@ -4,7 +4,7 @@ import styles from './LockScreen.module.css';
 import Clock from '../../components/Clock/Clock';
 import LoginView from '../../components/LoginView/LoginView';
 
-export default function LockScreen() {
+export default function LockScreen({ isLocked, setIsLocked }) {
     const [location, setLocation] = useState('');
 
     useEffect(() => {
@@ -29,7 +29,12 @@ export default function LockScreen() {
                 <LoginView />
             </div>
 
-            <div className={styles.cancel_holder}>
+            <div
+                className={styles.cancel_holder}
+                onClick={e => {
+                    e.stopPropagation();
+                    setIsLocked(true);
+                }}>
                 <div className={styles.cancel_button}>
                     <img src='assets/icons/close.png' alt='cancel' />
                 </div>
