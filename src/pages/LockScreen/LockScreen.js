@@ -5,10 +5,21 @@ import Clock from '../../components/Clock/Clock';
 import LoginView from '../../components/LoginView/LoginView';
 
 export default function LockScreen() {
+    const [location, setLocation] = useState('');
+
+    useEffect(() => {
+        window.electron.receiveMessage('message-from-main', data => {
+            setLocation(data[1]);
+        });
+
+        return () => {
+            window.electron.receiveMessage('message-from-main', null);
+        };
+    }, []);
+
     return (
         <div className={styles.root_view}>
             <img className={styles.wallpaper} src='assets/images/wallpaper.heic' />
-            {/* <img className={styles.wallpaper} src='assets/images/frame.png' /> */}
             <div>
                 <Clock />
                 <img className={styles.wifikeyicon} src='assets/images/wifi_key.png' />
@@ -24,7 +35,7 @@ export default function LockScreen() {
                 </div>
                 <p>Cancel</p>
             </div>
-            <h1 className={styles.location}>mds_1.0- p - e3r4p14</h1>
+            <h1 className={styles.location}>mds_1.0- p - {location}</h1>
         </div>
     );
 }
