@@ -53,12 +53,12 @@
 
 .login_input_holder input::placeholder {
 	color: #6d6b6c;
-	font-weight: 550;
+	font-weight: 580;
 }
 
 .login_input_holder img {
-	width: 15px;
-	height: 15px;
+	width: 14px;
+	height: 14px;
 	background-color: #656465;
 	border-radius: 50%;
 	padding: 5px;

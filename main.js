@@ -65,6 +65,18 @@ const createWindow = async () => {
       }
     });
   });
+
+  mainWindow.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.error('Failed to load URL:', errorDescription);
+  });
+
+  mainWindow.on('unresponsive', () => {
+    console.error('Window is unresponsive');
+  });
+
+  mainWindow.on('crashed', () => {
+    console.error('Window has crashed');
+  });
 };
 
 app.whenReady().then(() => {
