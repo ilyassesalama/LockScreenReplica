@@ -16,13 +16,6 @@ export default function LoginView() {
         };
     }, []);
 
-    // useEffect(() => {
-    //     document.addEventListener('keydown', handleKeyPress);
-    //     return () => {
-    //         document.removeEventListener('keydown', handleKeyPress);
-    //     };
-    // }, []);
-
     useEffect(() => {
         if (password.length > 0) {
             document.querySelector('#login-btn').style.visibility = 'visible';

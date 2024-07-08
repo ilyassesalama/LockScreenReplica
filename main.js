@@ -23,39 +23,34 @@ const createWindow = async () => {
     movable: false,
     backgroundColor: "#000000",
     webPreferences: {
+      devTools: false,
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: false,
       contextIsolation: true,
     },
-    // kiosk: true,
+    kiosk: true,
   });
 
   mainWindow.loadURL("http://localhost:3000");
 
-  globalShortcut.register("Control+Alt+.", () => {
+  globalShortcut.register("Control+Alt+=", () => {
     mainWindow.closable = true;
     mainWindow.close();
     app.quit();
   });
 
-  // Disable default behavior of Command+Tab
-  globalShortcut.register("Command+Tab", (e) => {
-    console.log("Command+Tab pressed, but it is prevented.");
-    e.preventDefault();
-  });
-
-  // Additional shortcut for opening dev tools
-  globalShortcut.register("Control+,", () => {
-    mainWindow.webContents.openDevTools();
+  globalShortcut.register("CommandOrControl+Tab", () => {
+    
   });
 
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("message-from-main", [user, hs.split(".")[0]]);
     mainWindow.webContents.on("before-input-event", (event, input) => {
       if (input.type === "keyDown") {
-        if ((input.control || input.meta) && input.key === "=") {
-          event.preventDefault();
-        } else if ((input.control || input.meta) && input.key === "-") {
+
+        const disabledKeys = ["=", "-"];
+
+        if ((input.control || input.meta) && disabledKeys.includes(input.key)) {
           event.preventDefault();
         }
 
@@ -82,8 +77,6 @@ const createWindow = async () => {
 app.whenReady().then(() => {
   if (app.dock) app.dock.hide();
   createWindow();
-
-  const ret = globalShortcut.isRegistered('Command+Tab');
 });
 
 app.on("will-quit", () => {
