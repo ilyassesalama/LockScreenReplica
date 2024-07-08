@@ -4,9 +4,10 @@ import styles from './LoginView.module.css';
 export default function LoginView() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [passWrong, setPassWrong] = useState(false);
 
     useEffect(() => {
-        document.getElementById("password_input").focus();
+        document.getElementById('password_input').focus();
         window.electron.receiveMessage('message-from-main', data => {
             setUsername(data[0]);
         });
@@ -30,12 +31,28 @@ export default function LoginView() {
         }
     }, [password]);
 
-    const handleLoginClick = () => {
-        const login_input_holder = document.querySelector('#login-input-holder');
-        login_input_holder.classList.add('vibrate');
+    const handleLoginClick = e => {
+        e.preventDefault();
+        const passwordInput = document.getElementById('password_input');
+        const loginBtn = document.getElementById('login-btn');
+
+        if (password.length === 0) return;
+
+        loginBtn.style.opacity = '0.6';
+        loginBtn.style.pointerEvents = 'none';
+        passwordInput.disabled = true;
+
         setTimeout(() => {
-            login_input_holder.classList.remove('vibrate');
-        }, 200);
+            setPassWrong(true);
+            loginBtn.style.opacity = '1';
+            loginBtn.style.pointerEvents = 'auto';
+            passwordInput.disabled = false;
+            passwordInput.focus();
+            setTimeout(() => {
+                setPassWrong(false);
+            }, 500);
+
+        }, 1500);
     };
 
     return (
@@ -44,21 +61,26 @@ export default function LoginView() {
                 <img className={styles.avatar} src='assets/images/avatar.png' />
                 <h1 className={styles.username}>{username}</h1>
             </div>
-
-            <div id='login-input-holder' className={styles.login_input_holder}>
-                <input
-                    id='password_input'
-                    onChange={e => setPassword(e.target.value)}
-                    type='password'
-                    placeholder='Enter Password'
-                />
-                <img
-                    onClick={handleLoginClick}
-                    id='login-btn'
-                    src='assets/icons/arrow.svg'
-                    alt='login'
-                />
-            </div>
+            <form className={styles.login_form} onSubmit={e => handleLoginClick(e)}>
+                <div
+                    id='login-input-holder'
+                    className={`${styles.login_input_holder} ${
+                        passWrong ? styles.vibrate : ''
+                    }`}>
+                    <input
+                        id='password_input'
+                        onChange={e => setPassword(e.target.value)}
+                        type='password'
+                        placeholder='Enter Password'
+                    />
+                    <img
+                        onClick={handleLoginClick}
+                        id='login-btn'
+                        src='assets/icons/arrow.svg'
+                        alt='login'
+                    />
+                </div>
+            </form>
         </div>
     );
 }

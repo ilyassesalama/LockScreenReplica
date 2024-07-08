@@ -31,7 +31,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
-	transform: translateX(17.5px);
+	transform: translateX(17px);
 	padding-top: 14px;
 }
 
@@ -63,4 +63,26 @@
 	border-radius: 50%;
 	padding: 5px;
 	transform: translate(-1.5px, 5px);
+}
+
+.login_input_holder.vibrate {
+	animation: vibrate .35s linear;
+}
+
+@keyframes vibrate {
+    8%, 41% {
+        transform: translateX(-17px);
+    }
+    25%, 58% {
+        transform: translateX(17px);
+    }
+    75% {
+        transform: translateX(-7px);
+    }
+    92% {
+        transform: translateX(7px);
+    }
+    0%, 100% {
+        transform: translateX(17px);
+    }
 }
