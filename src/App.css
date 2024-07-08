@@ -6,3 +6,8 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	user-select: none;
 }
+
+.fadein {
+	opacity: 0;
+	transition: opacity 0.2s;
+}
