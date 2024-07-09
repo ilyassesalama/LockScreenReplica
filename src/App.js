@@ -4,31 +4,49 @@ import NoSleep from 'nosleep.js';
 import LockScreen from './pages/LockScreen/LockScreen';
 
 const App = () => {
-    const [lockTimer, setLockTimer] = useState(null);
     const [isLocked, setIsLocked] = useState(false);
+    const lockTimerRef = useRef(null);
     const isLockedRef = useRef(isLocked);
     const nosleep = typeof NoSleep !== 'undefined' ? new NoSleep() : null;
-
-    const unlockScreen = () => {
-        document.getElementById('password_input').focus();
-        if (isLockedRef.current) {
-            setIsLocked(false);
-        }
-    };
 
     useEffect(() => {
         if (nosleep) {
             nosleep.enable();
         }
-    }, []);
+    }, [nosleep]);
+
+    const startLockTimer = () => {
+        if (lockTimerRef.current) {
+            clearTimeout(lockTimerRef.current);
+        }
+        lockTimerRef.current = setTimeout(() => {
+            setIsLocked(true);
+        }, 30000);
+    };
+
+    const resetTimerAndUnlockScreen = () => {
+        if (isLockedRef.current) {
+            setIsLocked(false);
+        }
+        if (document.activeElement.id !== 'password_input') {
+            document.getElementById('password_input').focus();
+        }
+        startLockTimer();
+    };
 
     useEffect(() => {
-        document.addEventListener('keypress', unlockScreen);
-        document.addEventListener('click', unlockScreen);
+        const handleUserActivity = () => {
+            resetTimerAndUnlockScreen();
+        };
+
+        document.addEventListener('keydown', handleUserActivity);
+        document.addEventListener('click', handleUserActivity);
+        document.addEventListener('mousemove', handleUserActivity);
 
         return () => {
-            document.removeEventListener('keypress', unlockScreen);
-            document.removeEventListener('click', unlockScreen);
+            document.removeEventListener('keydown', handleUserActivity);
+            document.removeEventListener('click', handleUserActivity);
+            document.removeEventListener('mousemove', handleUserActivity);
         };
     }, []);
 
@@ -36,10 +54,10 @@ const App = () => {
         isLockedRef.current = isLocked;
 
         if (isLocked) {
-            document.body.classList.add('fadein');
+            document.body.classList.add('fadeout');
             document.body.style.cursor = 'none';
         } else {
-            document.body.classList.remove('fadein');
+            document.body.classList.remove('fadeout');
             document.body.style.cursor = 'default';
             document.getElementById('password_input').focus();
         }
@@ -47,17 +65,13 @@ const App = () => {
 
     useEffect(() => {
         if (!isLocked) {
-            setLockTimer(
-                setTimeout(() => {
-                    setIsLocked(true);
-                }, 65000)
-            );
+            startLockTimer();
         } else {
-            clearTimeout(lockTimer);
+            clearTimeout(lockTimerRef.current);
         }
 
         return () => {
-            clearTimeout(lockTimer);
+            clearTimeout(lockTimerRef.current);
         };
     }, [isLocked]);
 
