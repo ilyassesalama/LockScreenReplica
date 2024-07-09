@@ -39,6 +39,8 @@ const createWindow = async () => {
         app.quit();
     });
 
+    globalShortcut.register('CommandOrControl+R', () => {});
+
     globalShortcut.register('CommandOrControl+Tab', () => {});
 
     mainWindow.webContents.on('did-finish-load', () => {
