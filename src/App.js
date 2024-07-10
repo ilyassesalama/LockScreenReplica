@@ -21,7 +21,7 @@ const App = () => {
         }
         lockTimerRef.current = setTimeout(() => {
             setIsLocked(true);
-        }, 30000);
+        }, 3 * 60 * 1000);
     };
 
     const resetTimerAndUnlockScreen = () => {
