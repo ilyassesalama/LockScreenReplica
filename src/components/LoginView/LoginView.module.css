@@ -61,6 +61,10 @@
     letter-spacing: -1px;
 }
 
+.password_input_holder input::selection {
+	background: #616161;
+}
+
 .password_input_holder p {
 	color: #6f6e6fce;
 	font-weight: 600;
