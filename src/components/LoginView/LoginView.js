@@ -19,8 +19,10 @@ export default function LoginView() {
     useEffect(() => {
         if (password.length > 0) {
             document.querySelector('#login-btn').style.visibility = 'visible';
+            document.querySelector('#password_hint').style.visibility = 'hidden';
         } else {
             document.querySelector('#login-btn').style.visibility = 'hidden';
+            document.querySelector('#password_hint').style.visibility = 'visible';
         }
     }, [password]);
 
@@ -44,7 +46,6 @@ export default function LoginView() {
             setTimeout(() => {
                 setPassWrong(false);
             }, 500);
-
         }, 1500);
     };
 
@@ -60,12 +61,15 @@ export default function LoginView() {
                     className={`${styles.login_input_holder} ${
                         passWrong ? styles.vibrate : ''
                     }`}>
-                    <input
-                        id='password_input'
-                        onChange={e => setPassword(e.target.value)}
-                        type='password'
-                        placeholder='Enter Password'
-                    />
+                    <div className={styles.password_input_holder}>
+                        <input
+                            id='password_input'
+                            onChange={e => setPassword(e.target.value)}
+                            type='password'
+                            placeholder=''
+                        />
+                        <p id='password_hint'>Enter Password</p>
+                    </div>
                     <img
                         onClick={handleLoginClick}
                         id='login-btn'

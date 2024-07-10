@@ -35,25 +35,41 @@
 	padding-top: 14px;
 }
 
-.login_input_holder input {
-	font-size: 13px;
+.password_input_holder {
+	border-radius: 4px;
+	height: 27px;
+	width: 159px;
+	background-color: rgba(61, 60, 61, 0.76);
+	backdrop-filter: blur(0.5rem);
+	margin-top: 10px;
+	position: relative;
+}
+
+.password_input_holder input {
+	font-size: 12.5px;
 	outline: none;
 	border: none;
 	border-radius: 4px;
 	height: 27px;
 	width: 159px;
-	padding: 6px;
+	padding: 6px 8px;
 	box-sizing: border-box;
-	background-color: rgba(61, 60, 61, 0.76);
-	backdrop-filter: blur(0.5rem);
-	color: #ffffff69;
+	color: #a3a3a3aa;
 	font-weight: 900;
-	margin-top: 10px;
+	background-color: transparent;
+	font-family: Verdana;
+    letter-spacing: -1px;
 }
 
-.login_input_holder input::placeholder {
-	color: #6d6b6c;
-	font-weight: 580;
+.password_input_holder p {
+	color: #6f6e6fce;
+	font-weight: 600;
+	font-size: 12.5px;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate(8px, 5.5px);
 }
 
 .login_input_holder img {
@@ -66,23 +82,26 @@
 }
 
 .login_input_holder.vibrate {
-	animation: vibrate .35s linear;
+	animation: vibrate 0.35s linear;
 }
 
 @keyframes vibrate {
-    8%, 41% {
-        transform: translateX(-17px);
-    }
-    25%, 58% {
-        transform: translateX(17px);
-    }
-    75% {
-        transform: translateX(-7px);
-    }
-    92% {
-        transform: translateX(7px);
-    }
-    0%, 100% {
-        transform: translateX(17px);
-    }
+	8%,
+	41% {
+		transform: translateX(-17px);
+	}
+	25%,
+	58% {
+		transform: translateX(17px);
+	}
+	75% {
+		transform: translateX(-7px);
+	}
+	92% {
+		transform: translateX(7px);
+	}
+	0%,
+	100% {
+		transform: translateX(17px);
+	}
 }
