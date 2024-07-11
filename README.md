@@ -2,7 +2,7 @@
 This project was made to reproduce how students can cheat in logtime in 42 schools to help the staff prevent students from using this way to accumulate logtime without them being present and using their sessions. The project uses `React.js` and `Electron` frameworks to replicate the lock screen of MacOS Catalina.
 
 > [!Caution]
-> **This script was made just for demonstration. Using this script in the school machines will result in suspending your scolarship for 3 months or permanently.**
+> **This script was made just for demonstration. Using this script in the school machines will result in suspending your scholarship for 3 months or permanently.**
 
 ## How it works?
 Since the school already had defenses from other ways to prevent students from cheating in logtime such as using `caffeinate`, black screen, and so on. I needed to find a way that can't be detected. The solution is to use something that can control the OS itself, but act like a website(?) running in a browser. The solution is to combine both React.js and Electron. 
